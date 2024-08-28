@@ -1,0 +1,54 @@
+/* static/css/styles.css */
+
+
+/* Estilos Generales */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Estilos para la Página de Login */
+
+.login-form {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h1 {
+    color: #007bff;
+    text-align: center;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+
+/* Estilos para la Página de Home */
+
+.home-page {
+    padding: 20px;
+    text-align: center;
+}
+
+.home-page h1 {
+    color: #28a745;
+}
+
+.home-page p {
+    font-size: 18px;
+    color: #555;
+}
