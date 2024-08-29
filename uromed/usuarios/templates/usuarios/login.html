@@ -7,14 +7,29 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class="login-form">
-        <h1>Login Page</h1>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login">
-        </form>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="back-arrow" onclick="location.href='inicio.html'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Volver</span>
+            </div>
+            <div>
+            <img src="imagen-logo-ejemplo.png" alt="Logo de la empresa">
+            <h2>Login</h2>
+            <form action="iniciar-sesion" method="post">
+                <input type="text" name="rut" placeholder="RUT" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Login</button>
+            </form>
+            <a href="recuperar-contraseña">¿Olvidaste tu contraseña?</a>
+            <a href="registro">¿No tienes cuenta? Regístrate</a>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-overlay"></div>
+        </div>
     </div>
 </body>
 </html>
