@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control</title>
+    <title>UROMED - Panel de Control</title>
     <link rel="stylesheet" href="{% static 'css/styles-home.css' %}">
 </head>
 <body>
@@ -16,7 +16,7 @@
                 <ul style="display: flex; list-style: none;">
                     <li><a href="#">Agregar Examen</a></li>
                     <li><a href="#">Agregar Informe</a></li>
-                    <li><a href="#">Cerrar Sesión</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,20 +39,22 @@
             <section class="grid">
                 <div class="card summary">
                     <h3>Resumen de Actividades</h3>
-                    <p>Total de Exámenes Realizados: <strong>10</strong></p>
-                    <p>Total de Informes Generados: <strong>5</strong></p>
+                    <p>Exámenes Realizados: <strong>10</strong></p>
+                    <p>Informes Generados: <strong>5</strong></p>
                     <p>Próximos Exámenes: <strong>2</strong></p>
                 </div>
 
                 <div class="card quick-actions">
                     <h3>Acciones Rápidas</h3>
-                    <button>Crear Nuevo Examen</button>
-                    <button>Generar Informe</button>
+                    <div class="button-container">
+                        <button class="action-button">Crear Nuevo Examen</button>
+                        <button class="action-button">Generar Informe</button>
+                    </div>
                 </div>
 
                 <div class="card notifications">
                     <h3>Notificaciones</h3>
-                    <ul>
+                    <ul class="notification-list">
                         <li>Nuevo examen creado: Examen de Altura Física.</li>
                         <li>Informe generado: Informe de Espacios Confinados.</li>
                     </ul>
@@ -62,6 +64,7 @@
                     <h3>Información Adicional</h3>
                     <p>Revisar las configuraciones de la aplicación y ajustar los parámetros necesarios.</p>
                 </div>
+
             </section>
         </main>
     </div>
