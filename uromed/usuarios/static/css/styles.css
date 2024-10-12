@@ -1,124 +1,108 @@
-/* static/css/styles.css */
+/* styles.css */
 
 
-/* Estilos Generales */
+/* Estilos para el Login */
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    height: 100vh;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Estilos para la Página de Inicio */
-
-
-
-/* Estilos para la Página de Login */
-
-.login-wrapper{
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ecf0f1;
     display: flex;
-    width: 100%;
-    height: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.login-container{
-    flex: 1;
+.login-container {
+    display: flex;
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.login-form {
+    flex: 0 0 300px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: #032f74;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
-    margin:auto;
-    text-align: center;
-    position: relative;
+    color: white;
 }
 
-.login-container img {
-    width: 100px; /* Ajusta el tamaño del logo */
-    margin-bottom: 20px;
-}
-.login-container h2 {
-    margin-bottom: 20px;
-}
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.login-container a {
-    color: #032f74;
-    text-decoration: none;
-    display: block;
-    margin: 10px 0;
-}
-.login-container a:hover {
-    text-decoration: underline;
-}
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #7eddd3;
-    border: none;
+.login-title {
+    margin-bottom: 30px;
+    font-size: 24px;
     color: white;
-    border-radius: 4px;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid grey;
+    border-radius: 0;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-bottom: 2px solid #7eddd3;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+button {
+    background: linear-gradient(180deg, #032f74, #7eddd3);
+    color: white;
+    padding: 10px;
+    border: 2px solid #7eddd3;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 10px; /* Espacio entre el botón y el campo de contraseña */
-}
-.login-container button:hover {
-    background-color: #50bdb2;
-}
-.back-arrow {
-    color:#ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-.back-arrow svg {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-.image-container{
-    flex: 1;
-    background-image: url(rutadelaimagen.jpg);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    
-}
-.image-overlay{
-    position:absolute;
-    top: 0;
-    left: 0;
     width: 100%;
+    margin-top: 20px;
+    transition: background 2s ease, border-color 2s ease;
+}
+
+button:hover {
+    background: linear-gradient(180deg, #28a745, #555);
+    border-color: #28a745;
+    transition-delay: 3s;
+}
+
+div p {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+
+/* Estilos para la imagen */
+
+.login-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image img {
+    width: auto;
     height: 100%;
-    background: rgba(64, 210, 213, 0.5);
-}
-
-/* Estilos para la Página de Home */
-
-.home-page {
-    padding: 20px;
-    text-align: center;
-}
-
-.home-page h1 {
-    color: #28a745;
-}
-
-.home-page p {
-    font-size: 18px;
-    color: #555;
+    object-fit: cover;
 }

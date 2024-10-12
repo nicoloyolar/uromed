@@ -3,13 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Bienvenido</title>
 </head>
 <body>
-    <div class="home-page">
-        <h1>Welcome to the Home Page</h1>
-        <p>This is the main page of your application.</p>
-    </div>
+    <h1>Bienvenido, {{ request.user.username }}</h1>
 </body>
 </html>
