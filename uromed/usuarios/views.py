@@ -6,12 +6,17 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
+
+        if not username or not password:
+            messages.error(request, 'Por favor, completa todos los campos.')
+            return render(request, 'usuarios/login.html')
+
         user = authenticate(request, username=username, password=password)
-        
+
         if user is not None:
             login(request, user)
-            return redirect('home')  
+            messages.success(request, 'Has iniciado sesión con éxito.')
+            return redirect('home')
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
     
