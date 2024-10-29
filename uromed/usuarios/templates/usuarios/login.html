@@ -20,6 +20,13 @@
         <div class="login-image">
             <img src="{% static 'images/equipo-medico.png' %}" alt="Imagen de fondo de login">
         </div>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </body>
 </html>

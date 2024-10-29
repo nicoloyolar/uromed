@@ -28,3 +28,15 @@ def logout_view(request):
 
 def home_view(request):
     return render(request, 'usuarios/home.html')
+
+def agenda_view(request):
+    return render(request, 'usuarios/agenda.html')  
+
+def informes_view(request):
+    return render(request, 'usuarios/informes.html') 
+
+def pacientes_view(request):
+    return render(request, 'usuarios/pacientes.html')  
+
+def examenes_view(request):
+    return render(request, 'usuarios/examenes.html') 

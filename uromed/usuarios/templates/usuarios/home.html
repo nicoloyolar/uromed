@@ -1,72 +1,54 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UROMED - Panel de Control</title>
+    <title>Home - UROMED</title>
     <link rel="stylesheet" href="{% static 'css/styles-home.css' %}">
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <h1>UROMED</h1>
-            <nav>
-                <ul style="display: flex; list-style: none;">
-                    <li><a href="#">Agregar Examen</a></li>
-                    <li><a href="#">Agregar Informe</a></li>
-                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                </ul>
-            </nav>
+    <div class="navbar">
+        <h1 class="logo">UROMED</h1>
+        <div class="nav-links">
+            <a href="{% url 'agenda_view' %}" class="btn">Agenda</a>
+            <a href="{% url 'informes_view' %}" class="btn">Informes</a>
+            <a href="{% url 'pacientes_view' %}" class="btn">Pacientes</a>
+            <a href="{% url 'examenes_view' %}" class="btn">Exámenes</a>
+            <a href="{% url 'logout' %}" class="btn">Cerrar Sesión</a>
         </div>
-    </header>
-
-    <div class="container">
-        <aside class="sidebar">
-            <h3>Navegación</h3>
-            <ul>
-                <li><a href="#">Gestión de Exámenes</a></li>
-                <li><a href="#">Ver Informes</a></li>
-                <li><a href="#">Configuraciones</a></li>
-                <li><a href="#">Historial</a></li>
-                <li><a href="#">Ayuda</a></li>
-            </ul>
-        </aside>
-
-        <main class="main-content">
-
-            <section class="grid">
-                <div class="card summary">
-                    <h3>Resumen de Actividades</h3>
-                    <p>Exámenes Realizados: <strong>10</strong></p>
-                    <p>Informes Generados: <strong>5</strong></p>
-                    <p>Próximos Exámenes: <strong>2</strong></p>
-                </div>
-
-                <div class="card quick-actions">
-                    <h3>Acciones Rápidas</h3>
-                    <div class="button-container">
-                        <button class="action-button">Crear Nuevo Examen</button>
-                        <button class="action-button">Generar Informe</button>
-                    </div>
-                </div>
-
-                <div class="card notifications">
-                    <h3>Notificaciones</h3>
-                    <ul class="notification-list">
-                        <li>Nuevo examen creado: Examen de Altura Física.</li>
-                        <li>Informe generado: Informe de Espacios Confinados.</li>
-                    </ul>
-                </div>
-
-                <div class="card additional-info">
-                    <h3>Información Adicional</h3>
-                    <p>Revisar las configuraciones de la aplicación y ajustar los parámetros necesarios.</p>
-                </div>
-
-            </section>
-        </main>
     </div>
+    
+    <div class="container">
+        <h2>Bienvenido, {{ request.user.username }}!</h2>
+        <p>Utiliza el menú de navegación para acceder a las diferentes funcionalidades de la aplicación.</p>
+        
+        <div class="cards-container">
+            <div class="card" id="agenda">
+                <h3>Agenda</h3>
+                <p>Consulta y gestiona la agenda de exámenes programados.</p>
+                <a href="{% url 'agenda_view' %}" class="btn">Ver Agenda</a>
+            </div>
+            <div class="card" id="informes">
+                <h3>Informes</h3>
+                <p>Accede a los informes de los exámenes realizados y resultados.</p>
+                <a href="{% url 'informes_view' %}" class="btn">Ver Informes</a>
+            </div>
+            <div class="card" id="pacientes">
+                <h3>Pacientes</h3>
+                <p>Gestiona los datos de los pacientes y sus exámenes.</p>
+                <a href="{% url 'pacientes_view' %}" class="btn">Ver Pacientes</a>
+            </div>
+            <div class="card" id="examenes">
+                <h3>Exámenes</h3>
+                <p>Consulta la lista de exámenes disponibles y sus requisitos.</p>
+                <a href="{% url 'examenes_view' %}" class="btn">Ver Exámenes</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 UROMED. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
