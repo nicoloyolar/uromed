@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UROMED{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles-home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles-nuevo-paciente.css' %}">  
+</head>
+<body>
+    <div class="navbar">
+        <h1 class="logo">UROMED</h1>
+        <div class="nav-links">
+            <a href="{% url 'nuevo_paciente' %}" class="btn">Registrar Paciente</a>
+            <a href="{% url 'examenes_view' %}" class="btn">Exámenes de Apoyo</a>
+            <a href="{% url 'informes_view' %}" class="btn">Generar Informes</a>
+            <a href="{% url 'agenda_view' %}" class="btn">Agenda</a>
+            <a href="{% url 'logout' %}" class="btn">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 UROMED. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

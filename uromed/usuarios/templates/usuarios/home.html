@@ -1,54 +1,41 @@
+{% extends 'usuarios/base.html' %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - UROMED</title>
-    <link rel="stylesheet" href="{% static 'css/styles-home.css' %}">
+
 </head>
 <body>
-    <div class="navbar">
-        <h1 class="logo">UROMED</h1>
-        <div class="nav-links">
-            <a href="{% url 'agenda_view' %}" class="btn">Agenda</a>
-            <a href="{% url 'informes_view' %}" class="btn">Informes</a>
-            <a href="{% url 'pacientes_view' %}" class="btn">Pacientes</a>
-            <a href="{% url 'examenes_view' %}" class="btn">Exámenes</a>
-            <a href="{% url 'logout' %}" class="btn">Cerrar Sesión</a>
-        </div>
-    </div>
-    
-    <div class="container">
+    {% block content %}
         <h2>Bienvenido, {{ request.user.username }}!</h2>
-        <p>Utiliza el menú de navegación para acceder a las diferentes funcionalidades de la aplicación.</p>
+        <p>Utiliza el menú de navegación para acceder a las funcionalidades relacionadas con la atención de pacientes.</p>
         
         <div class="cards-container">
+            <div class="card" id="registro-paciente">
+                <h3>Registrar Paciente</h3>
+                <p>Toma los datos y signos vitales de los pacientes.</p>
+                <a href="{% url 'nuevo_paciente' %}" class="btn">Iniciar Registro</a>
+            </div>
+            <div class="card" id="examenes">
+                <h3>Exámenes de Apoyo</h3>
+                <p>Consulta y registra los resultados de los exámenes de apoyo realizados.</p>
+                <a href="{% url 'examenes_view' %}" class="btn">Ver Exámenes</a>
+            </div>
+            <div class="card" id="informes">
+                <h3>Generar Informes</h3>
+                <p>Accede y genera informes de los datos recopilados para los pacientes.</p>
+                <a href="{% url 'informes_view' %}" class="btn">Crear Informe</a>
+            </div>
             <div class="card" id="agenda">
                 <h3>Agenda</h3>
                 <p>Consulta y gestiona la agenda de exámenes programados.</p>
                 <a href="{% url 'agenda_view' %}" class="btn">Ver Agenda</a>
             </div>
-            <div class="card" id="informes">
-                <h3>Informes</h3>
-                <p>Accede a los informes de los exámenes realizados y resultados.</p>
-                <a href="{% url 'informes_view' %}" class="btn">Ver Informes</a>
-            </div>
-            <div class="card" id="pacientes">
-                <h3>Pacientes</h3>
-                <p>Gestiona los datos de los pacientes y sus exámenes.</p>
-                <a href="{% url 'pacientes_view' %}" class="btn">Ver Pacientes</a>
-            </div>
-            <div class="card" id="examenes">
-                <h3>Exámenes</h3>
-                <p>Consulta la lista de exámenes disponibles y sus requisitos.</p>
-                <a href="{% url 'examenes_view' %}" class="btn">Ver Exámenes</a>
-            </div>
         </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 UROMED. Todos los derechos reservados.</p>
-    </footer>
+    {% endblock %}
 </body>
 </html>

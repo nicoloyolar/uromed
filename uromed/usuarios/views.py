@@ -35,8 +35,8 @@ def agenda_view(request):
 def informes_view(request):
     return render(request, 'usuarios/informes.html') 
 
-def pacientes_view(request):
-    return render(request, 'usuarios/pacientes.html')  
+def nuevo_paciente_view(request):
+    return render(request, 'usuarios/nuevo_paciente.html')  
 
 def examenes_view(request):
     return render(request, 'usuarios/examenes.html') 

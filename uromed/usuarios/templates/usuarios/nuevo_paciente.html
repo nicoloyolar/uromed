@@ -1,0 +1,107 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Paciente - UROMED</title>
+
+</head>
+<body>
+    {% block content %}
+        <h2>Agregar Nuevo Paciente</h2>
+        <form id="nuevoPacienteForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+
+            <label for="estado_civil">Estado Civil:</label>
+            <select id="estado_civil" name="estado_civil" required>
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+                <option value="viudo">Viudo</option>
+            </select>
+
+            <label for="antecedentes_medicos">Antecedentes Médicos:</label>
+            <textarea id="antecedentes_medicos" name="antecedentes_medicos" rows="4" placeholder="Ingrese antecedentes médicos relevantes..."></textarea>
+
+            <label for="alergias">Alergias:</label>
+            <textarea id="alergias" name="alergias" rows="2" placeholder="Ingrese alergias conocidas..."></textarea>
+
+            <label for="medicamentos">Medicamentos Actuales:</label>
+            <textarea id="medicamentos" name="medicamentos" rows="2" placeholder="Ingrese medicamentos actuales..."></textarea>
+
+            <h3>Parámetros Médicos</h3>
+
+            <label for="presion_arterial">Presión Arterial (mmHg):</label>
+            <input type="text" id="presion_arterial" name="presion_arterial" placeholder="Ej: 120/80" required>
+
+            <label for="frecuencia_cardiaca">Frecuencia Cardiaca (latidos por minuto):</label>
+            <input type="number" id="frecuencia_cardiaca" name="frecuencia_cardiaca" required>
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" name="peso" step="0.1" required>
+
+            <label for="talla">Talla (cm):</label>
+            <input type="number" id="talla" name="talla" required>
+
+            <label for="imc">IMC (Índice de Masa Corporal):</label>
+            <input type="number" id="imc" name="imc" step="0.1" readonly required>
+
+            <label for="saturacion">Saturación de Oxígeno (%):</label>
+            <input type="number" id="saturacion" name="saturacion" required>
+
+            <h3>Signos Vitales</h3>
+            <label for="temperatura">Temperatura (°C):</label>
+            <input type="number" id="temperatura" name="temperatura" step="0.1" required>
+
+            <label for="frecuencia_respiratoria">Frecuencia Respiratoria (respiraciones por minuto):</label>
+            <input type="number" id="frecuencia_respiratoria" name="frecuencia_respiratoria" required>
+
+            <button type="submit" class="btn">Agregar Paciente</button>
+        </form>
+    {% endblock %}
+    
+    <script>
+        document.getElementById('nuevoPacienteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Cálculo del IMC
+            const peso = parseFloat(document.getElementById('peso').value);
+            const talla = parseFloat(document.getElementById('talla').value) / 100; // Convertir a metros
+            const imc = (peso / (talla * talla)).toFixed(1);
+            document.getElementById('imc').value = imc;
+
+            alert("Paciente agregado!");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
