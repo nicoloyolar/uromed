@@ -12,4 +12,6 @@ urlpatterns = [
     path('examenes/', examenes_view, name='examenes_view'), 
     path('lista_examenes/', lista_examenes_view, name='lista_examenes'),
     path('lista_pacientes/', lista_pacientes_view, name='lista_pacientes'),
+    path('paciente/<int:paciente_id>/', nuevo_o_actualizar_paciente, name='nuevo_o_actualizar_paciente'),
+    path('paciente/', nuevo_o_actualizar_paciente, name='nuevo_o_actualizar_paciente'),
 ]

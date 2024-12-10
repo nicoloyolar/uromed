@@ -10,11 +10,12 @@
     <div class="login-container">
         <div class="login-form">
             <h1 class="login-title">Inicia sesión</h1>
+
             <form method="POST">
                 {% csrf_token %}
                 <input type="text" name="username" placeholder="Nombre de usuario" required autocomplete="off">
                 <input type="password" name="password" placeholder="Contraseña" required autocomplete="off">
-                <button type="submit">Iniciar sesión</button>
+                <button class="btn" type="submit">Iniciar sesión</button>
             </form>
         </div>
         <div class="login-image">

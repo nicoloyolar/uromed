@@ -10,115 +10,104 @@
 </head>
 <body>
     <div class="form-container">
-        <form id="nuevoPacienteForm" method="POST" action="{% url 'nuevo_paciente' %}">
+        <form method="POST" action="{% if paciente.id %}{% url 'nuevo_o_actualizar_paciente' paciente_id=paciente.id %}{% else %}{% url 'nuevo_o_actualizar_paciente' %}{% endif %}">
+
             {% csrf_token %}
             
             <fieldset>
                 <legend>Datos Personales</legend>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required autocomplete="name">
+                    <input type="text" id="nombre" name="nombre" value="{{ paciente.nombre }}" required>
                 </div>
                 <div class="form-group">
                     <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required autocomplete="family-name">
+                    <input type="text" id="apellido" name="apellido" value="{{ paciente.apellido }}" required>
                 </div>
                 <div class="form-group">
                     <label for="edad">Edad:</label>
-                    <input type="number" id="edad" name="edad" required autocomplete="age">
+                    <input type="number" id="edad" name="edad" value="{{ paciente.edad }}" required>
                 </div>
                 <div class="form-group">
                     <label for="genero">Género:</label>
                     <select id="genero" name="genero" required>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
+                        <option value="masculino" {% if paciente.genero == 'masculino' %}selected{% endif %}>Masculino</option>
+                        <option value="femenino" {% if paciente.genero == 'femenino' %}selected{% endif %}>Femenino</option>
+                        <option value="otro" {% if paciente.genero == 'otro' %}selected{% endif %}>Otro</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required autocomplete="address-line1">
+                    <input type="text" id="direccion" name="direccion" value="{{ paciente.direccion }}">
                 </div>
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required autocomplete="tel">
+                    <input type="text" id="telefono" name="telefono" value="{{ paciente.telefono }}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" autocomplete="email">
+                    <input type="email" id="email" name="email" value="{{ paciente.email }}">
                 </div>
                 <div class="form-group">
                     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ paciente.fecha_nacimiento|date:'Y-m-d' }}">
                 </div>
                 <div class="form-group">
                     <label for="estado_civil">Estado Civil:</label>
                     <select id="estado_civil" name="estado_civil" required>
-                        <option value="soltero">Soltero</option>
-                        <option value="casado">Casado</option>
-                        <option value="divorciado">Divorciado</option>
-                        <option value="viudo">Viudo</option>
+                        <option value="soltero" {% if paciente.estado_civil == 'soltero' %}selected{% endif %}>Soltero</option>
+                        <option value="casado" {% if paciente.estado_civil == 'casado' %}selected{% endif %}>Casado</option>
+                        <option value="divorciado" {% if paciente.estado_civil == 'divorciado' %}selected{% endif %}>Divorciado</option>
+                        <option value="viudo" {% if paciente.estado_civil == 'viudo' %}selected{% endif %}>Viudo</option>
                     </select>
                 </div>
             </fieldset>
 
             <fieldset>
-                <legend>Antecedentes Médicos</legend>
+                <legend>Datos Médicos</legend>
                 <div class="form-group">
                     <label for="antecedentes_medicos">Antecedentes Médicos:</label>
-                    <textarea id="antecedentes_medicos" name="antecedentes_medicos" rows="4" placeholder="Ingrese antecedentes médicos relevantes..."></textarea>
+                    <textarea id="antecedentes_medicos" name="antecedentes_medicos">{{ paciente.antecedentes_medicos }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="alergias">Alergias:</label>
-                    <textarea id="alergias" name="alergias" rows="4" placeholder="Ingrese alergias conocidas..."></textarea>
+                    <textarea id="alergias" name="alergias">{{ paciente.alergias }}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="medicamentos">Medicamentos Actuales:</label>
-                    <textarea id="medicamentos" name="medicamentos" rows="4" placeholder="Ingrese medicamentos actuales..."></textarea>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Parámetros Médicos</legend>
-                <div class="form-group">
-                    <label for="presion_arterial">Presión Arterial (mmHg):</label>
-                    <input type="text" id="presion_arterial" name="presion_arterial" placeholder="Ej: 120/80" required>
+                    <label for="medicamentos">Medicamentos:</label>
+                    <textarea id="medicamentos" name="medicamentos">{{ paciente.medicamentos }}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="frecuencia_cardiaca">Frecuencia Cardiaca (latidos por minuto):</label>
-                    <input type="number" id="frecuencia_cardiaca" name="frecuencia_cardiaca" required>
+                    <label for="presion_arterial">Presión Arterial:</label>
+                    <input type="text" id="presion_arterial" name="presion_arterial" value="{{ paciente.presion_arterial }}">
+                </div>
+                <div class="form-group">
+                    <label for="frecuencia_cardiaca">Frecuencia Cardíaca:</label>
+                    <input type="number" id="frecuencia_cardiaca" name="frecuencia_cardiaca" value="{{ paciente.frecuencia_cardiaca }}">
                 </div>
                 <div class="form-group">
                     <label for="peso">Peso (kg):</label>
-                    <input type="number" id="peso" name="peso" step="0.1" required>
+                    <input type="number" step="0.1" id="peso" name="peso" value="{{ paciente.peso }}">
                 </div>
                 <div class="form-group">
                     <label for="talla">Talla (cm):</label>
-                    <input type="number" id="talla" name="talla" required>
-                </div>
-                <div class="form-group">
-                    <label for="imc">IMC (Índice de Masa Corporal):</label>
-                    <input type="number" id="imc" name="imc" step="0.1" readonly required>
+                    <input type="number" id="talla" name="talla" value="{{ paciente.talla }}">
                 </div>
                 <div class="form-group">
                     <label for="saturacion">Saturación de Oxígeno (%):</label>
-                    <input type="number" id="saturacion" name="saturacion" required>
+                    <input type="number" id="saturacion" name="saturacion" value="{{ paciente.saturacion }}">
                 </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Signos Vitales</legend>
                 <div class="form-group">
                     <label for="temperatura">Temperatura (°C):</label>
-                    <input type="number" id="temperatura" name="temperatura" step="0.1" required>
+                    <input type="number" step="0.1" id="temperatura" name="temperatura" value="{{ paciente.temperatura }}">
                 </div>
                 <div class="form-group">
                     <label for="frecuencia_respiratoria">Frecuencia Respiratoria:</label>
-                    <input type="number" id="frecuencia_respiratoria" name="frecuencia_respiratoria" required>
+                    <input type="number" id="frecuencia_respiratoria" name="frecuencia_respiratoria" value="{{ paciente.frecuencia_respiratoria }}">
                 </div>
             </fieldset>
 
-            <button type="submit" class="btn">Agregar Paciente</button>
+            <button type="submit">Guardar</button>
         </form>
     </div>
 </body>
