@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes Registrados - UROMED</title>
+    <link rel="stylesheet" href="{% static 'css/styles-lista-pacientes.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Pacientes</h1>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Género</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>45</td>
+                    <td>Masculino</td>
+                    <td>+56 9 1234 5678</td>
+                    <td>juan.perez@example.com</td>
+                    <td>
+                        <a href="#" class="btn btn-view">Ver</a>
+                        <a href="#" class="btn btn-edit">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>María Gómez</td>
+                    <td>32</td>
+                    <td>Femenino</td>
+                    <td>+56 9 2345 6789</td>
+                    <td>maria.gomez@example.com</td>
+                    <td>
+                        <a href="#" class="btn btn-view">Ver</a>
+                        <a href="#" class="btn btn-edit">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Carlos López</td>
+                    <td>27</td>
+                    <td>Masculino</td>
+                    <td>+56 9 3456 7890</td>
+                    <td>carlos.lopez@example.com</td>
+                    <td>
+                        <a href="#" class="btn btn-view">Ver</a>
+                        <a href="#" class="btn btn-edit">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Sofía Martínez</td>
+                    <td>38</td>
+                    <td>Femenino</td>
+                    <td>+56 9 4567 8901</td>
+                    <td>sofia.martinez@example.com</td>
+                    <td>
+                        <a href="#" class="btn btn-view">Ver</a>
+                        <a href="#" class="btn btn-edit">Editar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>José Ramírez</td>
+                    <td>50</td>
+                    <td>Masculino</td>
+                    <td>+56 9 5678 9012</td>
+                    <td>jose.ramirez@example.com</td>
+                    <td>
+                        <a href="#" class="btn btn-view">Ver</a>
+                        <a href="#" class="btn btn-edit">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

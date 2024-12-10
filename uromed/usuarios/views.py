@@ -49,3 +49,7 @@ def examenes_view(request):
 def lista_examenes_view(request):
     examenes = Examen.objects.all()
     return render(request, 'usuarios/lista_examenes.html', {'examenes': examenes})
+
+@login_required
+def lista_pacientes_view(request):
+    return render(request, 'usuarios/lista_pacientes.html')
