@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import Examen
 
 def login_view(request):
     if request.method == 'POST':
@@ -38,5 +40,12 @@ def informes_view(request):
 def nuevo_paciente_view(request):
     return render(request, 'usuarios/nuevo_paciente.html')  
 
+@login_required
 def examenes_view(request):
-    return render(request, 'usuarios/examenes.html') 
+    examenes = Examen.objects.all()
+    return render(request, 'usuarios/lista_examenes.html', {'examenes': examenes})
+
+@login_required
+def lista_examenes_view(request):
+    examenes = Examen.objects.all()
+    return render(request, 'usuarios/lista_examenes.html', {'examenes': examenes})

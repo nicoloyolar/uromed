@@ -1,0 +1,8 @@
+{% block content %}
+  <h1>Lista de Exámenes</h1>
+  <ul>
+    {% for examen in examenes %}
+      <li>{{ examen.nombre }} - {{ examen.fecha }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
