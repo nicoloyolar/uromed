@@ -53,3 +53,7 @@ def lista_examenes_view(request):
 @login_required
 def lista_pacientes_view(request):
     return render(request, 'usuarios/lista_pacientes.html')
+
+@login_required
+def detalle_paciente_view(request):
+    return render(request, 'usuarios/detalle_paciente.html')
