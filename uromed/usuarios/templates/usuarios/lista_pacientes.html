@@ -34,8 +34,30 @@
                     <td>{{ paciente.telefono }}</td>
                     <td>{{ paciente.email }}</td>
                     <td>
-                        <a class="btn btn-view">Ver</a>
-                        <a class="btn btn-edit">Editar</a>
+                        <button class="btn btn-view"
+                                data-id="{{ paciente.id }}"
+                                data-nombre="{{ paciente.nombre }}"
+                                data-apellido="{{ paciente.apellido }}"
+                                data-edad="{{ paciente.edad }}"
+                                data-genero="{{ paciente.genero }}"
+                                data-direccion="{{ paciente.direccion }}"
+                                data-telefono="{{ paciente.telefono }}"
+                                data-email="{{ paciente.email }}"
+                                data-fecha-nacimiento="{{ paciente.fecha_nacimiento }}"
+                                data-estado-civil="{{ paciente.estado_civil }}"
+                                data-antecedentes="{{ paciente.antecedentes_medicos }}"
+                                data-alergias="{{ paciente.alergias }}"
+                                data-medicamentos="{{ paciente.medicamentos }}"
+                                data-presion="{{ paciente.presion_arterial }}"
+                                data-frecuencia-cardiaca="{{ paciente.frecuencia_cardiaca }}"
+                                data-peso="{{ paciente.peso }}"
+                                data-talla="{{ paciente.talla }}"
+                                data-imc="{{ paciente.imc }}"
+                                data-saturacion="{{ paciente.saturacion }}"
+                                data-temperatura="{{ paciente.temperatura }}"
+                                data-frecuencia-respiratoria="{{ paciente.frecuencia_respiratoria }}"
+                                onclick="showModal(this)">Ver</button>
+                        <a href="#" class="btn btn-edit">Editar</a>
                     </td>
                 </tr>
                 {% empty %}
@@ -46,5 +68,54 @@
             </tbody>
         </table>
     </div>
+
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalles del Paciente</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>ID:</strong> <span id="modal-id"></span></p>
+                <p><strong>Nombre:</strong> <span id="modal-nombre"></span></p>
+                <p><strong>Apellido:</strong> <span id="modal-apellido"></span></p>
+                <p><strong>Edad:</strong> <span id="modal-edad"></span></p>
+                <p><strong>Género:</strong> <span id="modal-genero"></span></p>
+                <p><strong>Dirección:</strong> <span id="modal-direccion"></span></p>
+                <p><strong>Teléfono:</strong> <span id="modal-telefono"></span></p>
+                <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                <p><strong>Fecha de Nacimiento:</strong> <span id="modal-fecha-nacimiento"></span></p>
+                <p><strong>Estado Civil:</strong> <span id="modal-estado-civil"></span></p>
+                <p><strong>Antecedentes Médicos:</strong> <span id="modal-antecedentes"></span></p>
+                <p><strong>Alergias:</strong> <span id="modal-alergias"></span></p>
+                <p><strong>Medicamentos:</strong> <span id="modal-medicamentos"></span></p>
+                <p><strong>Presión Arterial:</strong> <span id="modal-presion"></span></p>
+                <p><strong>Frecuencia Cardíaca:</strong> <span id="modal-frecuencia-cardiaca"></span></p>
+                <p><strong>Peso:</strong> <span id="modal-peso"></span></p>
+                <p><strong>Talla:</strong> <span id="modal-talla"></span></p>
+                <p><strong>IMC:</strong> <span id="modal-imc"></span></p>
+                <p><strong>Saturación:</strong> <span id="modal-saturacion"></span></p>
+                <p><strong>Temperatura:</strong> <span id="modal-temperatura"></span></p>
+                <p><strong>Frecuencia Respiratoria:</strong> <span id="modal-frecuencia-respiratoria"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showModal(button) {
+            const data = button.dataset;
+            for (const key in data) {
+                const element = document.getElementById(`modal-${key}`);
+                if (element) {
+                    element.textContent = data[key] || 'N/A';
+                }
+            }
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
