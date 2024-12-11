@@ -134,3 +134,8 @@ def nuevo_o_actualizar_paciente(request, paciente_id=None):
         return redirect('lista_pacientes')
 
     return render(request, 'nuevo_paciente.html', {'paciente': paciente})
+
+def eliminar_paciente_view(request, id):
+    paciente = get_object_or_404(Paciente, id=id)
+    paciente.delete()  
+    return redirect('lista_pacientes')  

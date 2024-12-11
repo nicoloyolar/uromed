@@ -11,7 +11,11 @@
 <body>
     <div class="container">
         <h1>Lista de Pacientes</h1>
-        
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar paciente..." oninput="filterPatients()">
+        </div>
+                
         <table class="table">
             <thead>
                 <tr>
@@ -57,7 +61,11 @@
                                 data-temperatura="{{ paciente.temperatura }}"
                                 data-frecuencia-respiratoria="{{ paciente.frecuencia_respiratoria }}"
                                 onclick="showModal(this)">Ver</button>
-                        <a href="#" class="btn btn-edit">Editar</a>
+                        <a class="btn btn-edit">Editar</a>
+                        <form action="{% url 'eliminar_paciente' paciente.id %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?')">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
                 {% empty %}
@@ -115,6 +123,23 @@
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        function filterPatients() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toLowerCase();
+            let rows = document.querySelectorAll(".table tbody tr");
+            rows.forEach(row => {
+                let cells = row.getElementsByTagName("td");
+                let name = cells[1].textContent || cells[1].innerText; 
+                if (name.toLowerCase().indexOf(filter) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
         }
     </script>
 </body>

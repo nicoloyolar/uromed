@@ -14,4 +14,6 @@ urlpatterns = [
     path('lista_pacientes/', lista_pacientes_view, name='lista_pacientes'),
     path('paciente/<int:paciente_id>/', nuevo_o_actualizar_paciente, name='nuevo_o_actualizar_paciente'),
     path('paciente/', nuevo_o_actualizar_paciente, name='nuevo_o_actualizar_paciente'),
+    path('eliminar_paciente/<int:id>/', eliminar_paciente_view, name='eliminar_paciente'),
+
 ]
