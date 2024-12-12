@@ -5,41 +5,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - UROMED</title>
-    <link rel="stylesheet" href="{% static 'css/styles-home.css' %}">
+    <title>Pacientes Registrados</title>
+    <link rel="stylesheet" href="{% static 'css/styles-lista-pacientes.css' %}">
 </head>
 <body>
-    {% block content %}
-        <h2>Bienvenido, {{ request.user.username }}!</h2>
-        <p>Utiliza el menú de navegación para acceder a las funcionalidades relacionadas con la atención de pacientes.</p>
-        
-        <div class="cards-container">
-            <div class="card" id="registro-paciente">
-                <h3>Registrar Paciente</h3>
-                <p>Toma los datos y signos vitales de los pacientes.</p>
-                <a href="{% url 'nuevo_paciente' %}" class="btn">Iniciar Registro</a>
-            </div>
-            <div class="card" id="registro-paciente">
-                <h3>Pacientes Registrados</h3>
-                <p>Lista los datos y signos vitales de los pacientes.</p>
-                <a href="{% url 'lista_pacientes' %}" class="btn">Ver Pacientes</a>
-            </div>
-            <div class="card" id="examenes">
-                <h3>Exámenes de Apoyo</h3>
-                <p>Consulta y registra los resultados de los exámenes de apoyo realizados.</p>
-                <a href="{% url 'examenes_view' %}" class="btn">Ver Exámenes</a>
-            </div>
-            <div class="card" id="informes">
-                <h3>Generar Informes</h3>
-                <p>Accede y genera informes de los datos recopilados para los pacientes.</p>
-                <a href="{% url 'informes_view' %}" class="btn">Crear Informe</a>
-            </div>
-            <div class="card" id="agenda">
-                <h3>Agenda</h3>
-                <p>Consulta y gestiona la agenda de exámenes programados.</p>
-                <a href="{% url 'agenda_view' %}" class="btn">Ver Agenda</a>
-            </div>
+    <div class="container">
+        <h1>Lista de Pacientes</h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar paciente por nombre..." oninput="filterPatients()">
         </div>
-    {% endblock %}
+                
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Género</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                <tr>
+                    <td>{{ paciente.id }}</td>
+                    <td>{{ paciente.nombre }} {{ paciente.apellido }}</td>
+                    <td>{{ paciente.edad }}</td>
+                    <td>{{ paciente.genero }}</td>
+                    <td>{{ paciente.telefono }}</td>
+                    <td>{{ paciente.email }}</td>
+                    <td>
+                        <a class="btn btn-view" href="{% url 'detalle_paciente' paciente.id %}">Ver detalles</a>
+                        <form action="{% url 'eliminar_paciente' paciente.id %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este paciente?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No hay pacientes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        function filterPatients() {
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toLowerCase();
+            let rows = document.querySelectorAll(".table tbody tr");
+            rows.forEach(row => {
+                let cells = row.getElementsByTagName("td");
+                let name = cells[1].textContent || cells[1].innerText; 
+                if (name.toLowerCase().indexOf(filter) > -1) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

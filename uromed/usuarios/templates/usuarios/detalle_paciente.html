@@ -12,13 +12,13 @@
 <body>
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Juan Pérez - 45 años</h2>
+            <h2>Evaluación del paciente</h2>
             <button class="btn btn-primary">Volver a la lista</button>
         </div>
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="tab-informacion-paciente-tab" data-bs-toggle="tab" href="#tab-informacion-paciente" role="tab" aria-controls="tab-informacion-paciente" aria-selected="true">Información Básica</a>
+                <a class="nav-link active" id="tab-informacion-paciente-tab" data-bs-toggle="tab" href="#tab-informacion-paciente" role="tab" aria-controls="tab-informacion-paciente" aria-selected="true">Datos Personales</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tab-signos-vitales-tab" data-bs-toggle="tab" href="#tab-signos-vitales" role="tab" aria-controls="tab-signos-vitales" aria-selected="false">Signos Vitales</a>
@@ -36,16 +36,18 @@
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-informacion-paciente" role="tabpanel" aria-labelledby="tab-informacion-paciente-tab">
-                <h4>Datos Generales</h4>
-                <p><strong>Nombre:</strong> Juan Pérez</p>
-                <p><strong>Edad:</strong> 45</p>
-                <p><strong>Género:</strong> Masculino</p>
-                <p><strong>Teléfono:</strong> +56 9 1234 5678</p>
-                <p><strong>Email:</strong> juan.perez@example.com</p>
+
+                <p><strong>Nombre:</strong> {{paciente.nombre}} {{paciente.apellido}}</p>
+                <p><strong>Edad:</strong> {{paciente.edad}} años</p>
+                <p><strong>Género:</strong> {{paciente.genero}}</p>
+                <p><strong>Teléfono:</strong> {{paciente.telefono}}</p>
+                <p><strong>Email:</strong> {{paciente.email}}</p>
+                <p><strong>Dirección:</strong> {{paciente.direccion}}</p>
+                <p><strong>Fecha de Nacimiento:</strong> {{paciente.fecha_nacimiento}}</p>
+                <p><strong>Estado Civil:</strong> {{paciente.estado_civil}}</p>
             </div>
 
             <div class="tab-pane fade" id="tab-signos-vitales" role="tabpanel" aria-labelledby="tab-signos-vitales-tab">
-                <h4>Signos Vitales</h4>
                 <table class="table">
                     <thead>
                         <tr>
@@ -56,34 +58,50 @@
                     <tbody>
                         <tr>
                             <td>Presión Arterial</td>
-                            <td>120/80 mmHg</td>
+                            <td>{{paciente.presion_arterial}} mmHg</td>
                         </tr>
                         <tr>
                             <td>Frecuencia Cardíaca</td>
-                            <td>75 bpm</td>
+                            <td>{{paciente.frecuencia_cardiaca}} bpm</td>
                         </tr>
                         <tr>
                             <td>Peso</td>
-                            <td>80 kg</td>
+                            <td>{{paciente.peso}} kg</td>
                         </tr>
                         <tr>
                             <td>Talla</td>
-                            <td>1.75 m</td>
+                            <td>{{paciente.talla}} m</td>
                         </tr>
                         <tr>
                             <td>IMC</td>
-                            <td>26.1</td>
+                            <td>{{paciente.imc}}</td>
                         </tr>
                         <tr>
                             <td>Saturación de Oxígeno</td>
-                            <td>98%</td>
+                            <td>{{paciente.saturacion}} %</td>
+                        </tr>
+                        <tr>
+                            <td>Temperatura</td>
+                            <td>{{paciente.temperatura}}</td>
+                        </tr>
+                        <tr>
+                            <td>Medicamentos</td>
+                            <td>{{paciente.medicamentos}}</td>
+                        </tr>
+                        <tr>
+                            <td>Alergias</td>
+                            <td>{{paciente.alergias}}</td>
+                        </tr>
+                        <tr>
+                            <td>Antecedentes Médicos</td>
+                            <td>{{paciente.antecedentes_medicos}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="tab-pane fade" id="tab-examenes" role="tabpanel" aria-labelledby="tab-examenes-tab">
-                <h4>Exámenes Realizados</h4>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -108,12 +126,10 @@
             </div>
 
             <div class="tab-pane fade" id="tab-anamnesis" role="tabpanel" aria-labelledby="tab-anamnesis-tab">
-                <h4>Anamnesis</h4>
                 <textarea class="form-control" rows="5" placeholder="Escriba las observaciones aquí..."></textarea>
             </div>
 
             <div class="tab-pane fade" id="tab-interconsultas" role="tabpanel" aria-labelledby="tab-interconsultas-tab">
-                <h4>Interconsultas</h4>
                 <textarea class="form-control" rows="5" placeholder="Escriba las interconsultas aquí..."></textarea>
             </div>
         </div>
