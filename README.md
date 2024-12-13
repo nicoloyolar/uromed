@@ -2,6 +2,12 @@ Proyecto Django - Uromed
 
 Este proyecto es una aplicación web desarrollada con Django para la gestión de usuarios y generación de exámenes para el centro médico UROMED. Aquí se detalla la configuración y las funcionalidades implementadas hasta ahora.
 
+Superusuario:
+
+    - user: admin-uromed 
+    - pass: uromed123*!
+    - email: admin-uromed@uromed.cl 
+
 Requisitos:
 
     - Python 3.11 o superior
@@ -16,13 +22,26 @@ Configuración Inicial del Proyecto:
 
 Estructura de Archivos Estáticos
 
-    - CSS: Los archivos CSS se encuentran en static/css/.
-    - JavaScript: Los archivos JS se encuentran en static/js/.
-    - Imágenes: Las imágenes se encuentran en static/images/.
+    - CSS: Los archivos CSS se encuentran en static/css/.           ✔
+    - JavaScript: Los archivos JS se encuentran en static/js/.      ✔
+    - Imágenes: Las imágenes se encuentran en static/images/.       ✔
 
 Funcionalidades Implementadas
 
     - Vista de Inicio y Login
 
-        - La vista de inicio (home) y login (login) están implementadas.
-        - Se aplicaron estilos CSS para mejorar la apariencia de estas vistas.
+        - La vista de inicio (home) y login (login) están implementadas.        ✔
+        - Se aplicaron estilos CSS para mejorar la apariencia de estas vistas.  ✔
+
+Paleta de Colores:
+
+    - #032f74
+    - #7eddd3
+    - #28a745
+    - #555
+    - #ecf0f1
+
+Vistas:
+
+    - Login     ✔
+    - Home      ✔

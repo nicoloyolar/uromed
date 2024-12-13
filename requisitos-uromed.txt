@@ -1,0 +1,69 @@
+primera etapa:
+
+	- registro de datos desde sitio web
+	
+		- ingreso de personas mediante formulario
+		- registro de datos empresa
+		- proporcionar información
+		- agenda
+
+segunda etapa:
+
+		- roles
+
+			- paramédico / enfermera
+				
+				- toman datos del paciente
+			
+					- signos vitales
+					- presión arterial
+					- frecuencia cardiaca
+					- peso 
+					- talla
+					- IMC
+					- saturación de oxígeno
+
+				- exámenes de apoyo
+			
+					- glicemia
+					- creatinina
+					- hemograma 			(detallar) 
+					- lípidos 				(detallar)
+					- test visual   		(ojo izquierdo - ojo derecho - profundidad - colores)
+					- auditivo				(oido izquierdo - oido derecho / gráfica y valor calculado)
+					- radiografía tórax		(distintos privilegios por rol)
+					- espirometría
+					- test de rutfier
+					- electrocardiograma
+
+			- médico
+
+					- datos personales del paciente
+					- signos vitales del paciente  	
+					- anoamnesis
+					- exámenes para clasificación y observación
+					- interconsultas para hacer nuevos examenes o estudios
+					- se genera un PDF con los datos del paciente:
+
+						- informe (apto / no apto / contraindicado temporal / contraindicado permanente)
+						- estado de paciente para poder trabajar
+						- un informe va a la empresa, el otro va hacia el paciente
+
+super usuario		
+
+	user	: admin 
+	email	: admin@admin.cl 
+	pass	: admin123*!
+
+TO DO LIST:
+
+	- editar paciente 
+
+
+
+
+
+
+
+
+
