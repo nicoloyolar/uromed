@@ -15,7 +15,6 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Evaluación del paciente</h2>
-            <button class="btn btn-primary">Reporte Paciente</button>
         </div>
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -197,8 +196,37 @@
             </div>
 
             <div class="tab-pane fade" id="tab-interconsultas" role="tabpanel" aria-labelledby="tab-interconsultas-tab">
-                <textarea class="form-control" rows="5" placeholder="Escriba las interconsultas aquí..."></textarea>
+                
+                <form id="form-interconsulta">
+                    <div class="mb-3">
+                        <label for="especialidad" class="form-label">Especialidad a donde se deriva:</label>
+                        <select class="form-control" id="especialidad" name="especialidad">
+                            <option value="medico_general">Médico General</option>
+                            <option value="psiquiatra">Psiquiatra</option>
+                            <option value="traumatologa">Traumatóloga</option>
+                            <option value="cardiologo">Cardiólogo</option>
+                            <option value="endocrinologo">Endocrinólogo</option>
+                            <option value="gastroenterologo">Gastroenterólogo</option>
+                            <option value="broncopulmonar">Broncopulmonar</option>
+                            <option value="nutricionista">Nutricionista</option>
+                            <option value="neurologo">Neurólogo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="patologia" class="form-label">Patología detectada:</label>
+                        <textarea class="form-control" id="patologia" rows="3" placeholder="Describa la patología aquí..."></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha de la interconsulta:</label>
+                        <input type="date" class="form-control" id="fecha" value="{{ current_date }}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Guardar Interconsulta</button>
+                </form>
             </div>
+
         </div>
     </div>
 
