@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Examen, Paciente
+from .models import Paciente, Examen
+from datetime import datetime
 
 def login_view(request):
     if request.method == 'POST':
@@ -37,7 +38,6 @@ def nuevo_paciente_view(request):
     return render(request, 'usuarios/nuevo_paciente.html')  
 
 def nuevo_o_actualizar_paciente(request, paciente_id=None):
-    
     paciente = None
     if paciente_id:
         paciente = get_object_or_404(Paciente, pk=paciente_id)
@@ -62,6 +62,7 @@ def nuevo_o_actualizar_paciente(request, paciente_id=None):
         saturacion                              = request.POST.get('saturacion')
         temperatura                             = request.POST.get('temperatura')
         frecuencia_respiratoria                 = request.POST.get('frecuencia_respiratoria')
+        rut                                     = request.POST.get('rut')  
 
         if paciente:
             paciente.nombre                     = nombre
@@ -83,6 +84,7 @@ def nuevo_o_actualizar_paciente(request, paciente_id=None):
             paciente.saturacion                 = saturacion
             paciente.temperatura                = temperatura
             paciente.frecuencia_respiratoria    = frecuencia_respiratoria
+            paciente.rut                        = rut  
             paciente.save()
         else:
             paciente = Paciente(
@@ -104,19 +106,50 @@ def nuevo_o_actualizar_paciente(request, paciente_id=None):
                 talla                           = talla,
                 saturacion                      = saturacion,
                 temperatura                     = temperatura,
-                frecuencia_respiratoria         = frecuencia_respiratoria
+                frecuencia_respiratoria         = frecuencia_respiratoria,
+                rut                             = rut  
             )
             paciente.save()
 
-        return redirect('lista_pacientes')
+        return redirect('home')
 
     return render(request, 'nuevo_paciente.html', {'paciente': paciente})
 
 def detalle_paciente_view(request, paciente_id):
+    # Recuperamos el paciente
     paciente = get_object_or_404(Paciente, id=paciente_id)
-    return render(request, 'usuarios/detalle_paciente.html', {'paciente': paciente})
+    
+    # Recuperamos los exámenes del paciente y pre-cargamos las pruebas asociadas
+    examenes = Examen.objects.filter(paciente=paciente).prefetch_related('pruebas')
+    
+    return render(request, 'usuarios/detalle_paciente.html', {
+        'paciente': paciente,
+        'examenes': examenes  
+    })
 
 def eliminar_paciente_view(request, id):
     paciente = get_object_or_404(Paciente, id=id)
     paciente.delete()  
     return redirect('lista_pacientes')  
+
+
+def agregar_observaciones(request, paciente_id):
+    paciente = Paciente.objects.get(id=paciente_id)
+
+    if request.method == 'POST':
+        nombre_examen = request.POST['nombre_examen']
+        resultado_examen = request.POST['resultado_examen']
+        observaciones_examen = request.POST['observaciones_examen']
+
+        # Crear un nuevo examen
+        examen = Examen.objects.create(
+            paciente=paciente,
+            nombre=nombre_examen,
+            resultado=resultado_examen,
+            observaciones=observaciones_examen,
+            fecha=datetime.today().date()
+        )
+
+        return redirect('detalles_paciente', paciente_id=paciente.id)
+
+    return redirect('detalles_paciente', paciente_id=paciente.id)

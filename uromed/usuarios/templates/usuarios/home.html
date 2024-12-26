@@ -13,7 +13,7 @@
         <h1>Lista de Pacientes</h1>
 
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar paciente por nombre..." oninput="filterPatients()">
+            <input type="text" id="searchInput" placeholder="Buscar paciente por RUT o nombre..." oninput="filterPatients()">
         </div>
                 
         <table class="table">
@@ -21,6 +21,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>RUT</th> <!-- Nueva columna -->
                     <th>Edad</th>
                     <th>Género</th>
                     <th>Teléfono</th>
@@ -33,6 +34,7 @@
                 <tr>
                     <td>{{ paciente.id }}</td>
                     <td>{{ paciente.nombre }} {{ paciente.apellido }}</td>
+                    <td>{{ paciente.rut }}</td> <!-- Mostrar el RUT -->
                     <td>{{ paciente.edad }}</td>
                     <td>{{ paciente.genero }}</td>
                     <td>{{ paciente.telefono }}</td>
@@ -47,7 +49,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="7">No hay pacientes registrados.</td>
+                    <td colspan="8">No hay pacientes registrados.</td> <!-- Actualizar colspan -->
                 </tr>
                 {% endfor %}
             </tbody>
@@ -62,8 +64,9 @@
             let rows = document.querySelectorAll(".table tbody tr");
             rows.forEach(row => {
                 let cells = row.getElementsByTagName("td");
-                let name = cells[1].textContent || cells[1].innerText; 
-                if (name.toLowerCase().indexOf(filter) > -1) {
+                let name = cells[1].textContent || cells[1].innerText;
+                let rut = cells[2].textContent || cells[2].innerText;
+                if (name.toLowerCase().indexOf(filter) > -1 || rut.toLowerCase().indexOf(filter) > -1) {
                     row.style.display = "";
                 } else {
                     row.style.display = "none";

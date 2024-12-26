@@ -21,7 +21,6 @@ html {
     width: 100%;
     max-width: 1200px;
     height: 90%;
-    /* Ajustamos la altura para que quepa en pantalla */
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -32,7 +31,6 @@ html {
 
 h2 {
     font-size: 1.5rem;
-    /* Reducimos el tamaño */
     color: #032f74;
     margin-bottom: 1rem;
     text-align: left;
@@ -42,7 +40,6 @@ h2 {
     border-bottom: 2px solid #032f74;
     display: flex;
     justify-content: space-evenly;
-    /* Espaciado uniforme */
 }
 
 .nav-link {
@@ -63,7 +60,6 @@ h2 {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    /* Permitimos desplazamiento interno */
     padding: 0.5rem 0;
 }
 
@@ -71,7 +67,6 @@ h2 {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
-    /* Reducimos el tamaño */
     margin: 0.5rem 0;
 }
 
@@ -84,7 +79,6 @@ h2 {
 .table thead th,
 .table tbody td {
     padding: 0.5rem;
-    /* Reducimos el espaciado */
 }
 
 .table tbody tr:nth-child(even) {
@@ -99,16 +93,37 @@ textarea.form-control {
 
 button.btn {
     font-size: 0.9rem;
-    /* Reducimos el tamaño */
     padding: 0.5rem 1rem;
     border-radius: 5px;
     background-color: #032f74;
+    color: white;
     border: none;
-    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button.btn:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.btn-info {
+    background-color: #17a2b8;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+button.btn-info:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+    color: white;
+}
+
+button.btn-close {
+    font-size: 1.2rem;
+    color: #032f74;
 }
 
 @media (max-width: 768px) {

@@ -1,16 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-class Examen(models.Model):
-    nombre          = models.CharField(max_length=100)
-    descripcion     = models.TextField(blank=True, null=True)
-    fecha           = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.nombre
+from django.core.validators import RegexValidator
 
 class Usuario(AbstractUser):
+    """Se define un modelo para los distintos usuarios que utilizarán la aplicación"""
     
     PACIENTE        = 'paciente'
     MEDICO          = 'medico'
@@ -58,37 +52,57 @@ class Usuario(AbstractUser):
         return f"{self.first_name} {self.last_name}" if self.first_name and self.last_name else self.username
 
 class Paciente(models.Model):
-    nombre                  = models.CharField(max_length=100, null=True, blank=True)
-    apellido                = models.CharField(max_length=100, null=True, blank=True)
-    edad                    = models.IntegerField(null=True, blank=True)
-    genero                  = models.CharField(max_length=20, choices=[
-        ('masculino', 'Masculino'),
-        ('femenino', 'Femenino'),
-        ('otro', 'Otro')
-    ], null=True, blank=True)
-    direccion               = models.TextField(null=True, blank=True)
-    telefono                = models.CharField(max_length=20, null=True, blank=True)
-    email                   = models.EmailField(null=True, blank=True)
-    fecha_nacimiento        = models.DateField(null=True, blank=True)
-    estado_civil            = models.CharField(max_length=20, choices=[
-        ('soltero', 'Soltero'),
-        ('casado', 'Casado'),
-        ('divorciado', 'Divorciado'),
-        ('viudo', 'Viudo')
-    ], null=True, blank=True)
-
-    antecedentes_medicos    = models.TextField(null=True, blank=True)
-    alergias                = models.TextField(null=True, blank=True)
-    medicamentos            = models.TextField(null=True, blank=True)
-
-    presion_arterial        = models.CharField(max_length=10, null=True, blank=True)
-    frecuencia_cardiaca     = models.IntegerField(null=True, blank=True)
-    peso                    = models.FloatField(null=True, blank=True)
-    talla                   = models.IntegerField(null=True, blank=True)
-    imc                     = models.FloatField(null=True, blank=True)
-    saturacion              = models.IntegerField(null=True, blank=True)
-
-    temperatura             = models.FloatField(null=True, blank=True)
+    """Se define un modelo para los pacientes que se registrarán en la aplicación"""
+    nombre = models.CharField(max_length=100, null=True, blank=True)
+    apellido = models.CharField(max_length=100, null=True, blank=True)
+    rut = models.CharField(
+        max_length=12, 
+        unique=True, 
+        null=True, 
+        blank=True,
+        validators=[
+            RegexValidator(
+                regex=r"^\d{1,2}\.\d{3}\.\d{3}-[\dkK]$",
+                message="El RUT debe tener el formato 12.345.678-K."
+            )
+        ]
+    )      
+    edad = models.IntegerField(null=True, blank=True)
+    genero = models.CharField(
+        max_length=20,
+        choices=[
+            ('masculino', 'Masculino'),
+            ('femenino', 'Femenino'),
+            ('otro', 'Otro')
+        ],
+        null=True,
+        blank=True
+    )
+    direccion = models.TextField(null=True, blank=True)
+    telefono = models.CharField(max_length=20, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
+    estado_civil = models.CharField(
+        max_length=20,
+        choices=[
+            ('soltero', 'Soltero'),
+            ('casado', 'Casado'),
+            ('divorciado', 'Divorciado'),
+            ('viudo', 'Viudo')
+        ],
+        null=True,
+        blank=True
+    )
+    antecedentes_medicos = models.TextField(null=True, blank=True)
+    alergias = models.TextField(null=True, blank=True)
+    medicamentos = models.TextField(null=True, blank=True)
+    presion_arterial = models.CharField(max_length=10, null=True, blank=True)
+    frecuencia_cardiaca = models.IntegerField(null=True, blank=True)
+    peso = models.FloatField(null=True, blank=True)
+    talla = models.IntegerField(null=True, blank=True)
+    imc = models.FloatField(null=True, blank=True)
+    saturacion = models.IntegerField(null=True, blank=True)
+    temperatura = models.FloatField(null=True, blank=True)
     frecuencia_respiratoria = models.IntegerField(null=True, blank=True)
 
     def calcular_imc(self):
@@ -98,4 +112,23 @@ class Paciente(models.Model):
             self.save()
 
     def __str__(self):
-        return f"{self.nombre or 'Paciente sin nombre'} {self.apellido or ''}"
+        return f"{self.rut or 'Sin RUT'} - {self.nombre or 'Paciente sin nombre'} {self.apellido or ''}"
+    
+class Examen(models.Model):
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name="examenes")
+    nombre = models.CharField(max_length=255)
+    resultado = models.CharField(max_length=255)
+    observaciones = models.TextField(blank=True, null=True)
+    fecha = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Examen de {self.paciente.nombre} - {self.nombre}"
+
+class Prueba(models.Model):
+    examen = models.ForeignKey(Examen, on_delete=models.CASCADE, related_name="pruebas")
+    nombre = models.CharField(max_length=255)  
+    resultado = models.CharField(max_length=255, blank=True, null=True)  
+    observaciones = models.TextField(blank=True, null=True)  
+
+    def __str__(self):
+        return f"Prueba {self.nombre} para {self.examen.nombre}"
