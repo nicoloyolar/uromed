@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Paciente, Examen
 from datetime import datetime
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 def login_view(request):
     if request.method == 'POST':
@@ -116,10 +119,8 @@ def nuevo_o_actualizar_paciente(request, paciente_id=None):
     return render(request, 'nuevo_paciente.html', {'paciente': paciente})
 
 def detalle_paciente_view(request, paciente_id):
-    # Recuperamos el paciente
     paciente = get_object_or_404(Paciente, id=paciente_id)
     
-    # Recuperamos los exámenes del paciente y pre-cargamos las pruebas asociadas
     examenes = Examen.objects.filter(paciente=paciente).prefetch_related('pruebas')
     
     return render(request, 'usuarios/detalle_paciente.html', {
@@ -141,7 +142,6 @@ def agregar_observaciones(request, paciente_id):
         resultado_examen = request.POST['resultado_examen']
         observaciones_examen = request.POST['observaciones_examen']
 
-        # Crear un nuevo examen
         examen = Examen.objects.create(
             paciente=paciente,
             nombre=nombre_examen,
@@ -153,3 +153,4 @@ def agregar_observaciones(request, paciente_id):
         return redirect('detalles_paciente', paciente_id=paciente.id)
 
     return redirect('detalles_paciente', paciente_id=paciente.id)
+

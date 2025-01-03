@@ -34,7 +34,7 @@
                 <a class="nav-link" id="tab-interconsultas-tab" data-bs-toggle="tab" href="#tab-interconsultas" role="tab" aria-controls="tab-interconsultas" aria-selected="false">Interconsultas</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="tab-anamnesis-tab" data-bs-toggle="tab" href="#tab-anamnesis" role="tab" aria-controls="tab-anamnesis" aria-selected="false">Informe Médico</a>
+                <a class="nav-link" id="tab-reporte-tab" data-bs-toggle="tab" href="#tab-reporte" role="tab" aria-controls="tab-reporte" aria-selected="false">Informe Médico</a>
             </li>
         </ul>
 
@@ -224,6 +224,61 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Guardar Interconsulta</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="tab-reporte" role="tabpanel" aria-labelledby="tab-reporte-tab">
+
+                <div id="resumen-informe" class="mb-4">
+                    <h4>Resumen del Informe Médico</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nombre del Trabajador</td>
+                                <td>{{paciente.nombre}} {{paciente.apellido}}</td>
+                            </tr>
+                            <tr>
+                                <td>RUT del Trabajador</td>
+                                <td>{{paciente.rut}}</td>
+                            </tr>
+                            <tr>
+                                <td>Empresa</td>
+                                <td>Arauco </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <hr>
+                    <h5>Advertencias:</h5>
+                    <ul>
+                        <li>Los elementos utilizados y/o disponibles en esta evaluación no aseguran que el trabajador esté exento de presentar síntomas o complicaciones de salud.</li>
+                        <li>El detalle de la evaluación solo puede ser entregado con autorización explícita por el trabajador mediante un documento firmado.</li>
+                        <li>La adulteración de este certificado es un delito penado por la ley.</li>
+                    </ul>
+                    <hr>
+                </div>
+
+                <form id="form-reporte" action="/generar_reporte_pdf/" method="POST">
+                    
+                    <div class="mb-3">
+                        <label for="evaluacion" class="form-label">Evaluación:</label>
+                        <select class="form-control" id="evaluacion" name="evaluacion" required>
+                            <option value="apto">Apto</option>
+                            <option value="contraindicado">Contraindicado</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="observaciones" class="form-label">Observaciones:</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones" rows="4" placeholder="Observaciones sobre la evaluación..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Generar Reporte PDF</button>
                 </form>
             </div>
 
